@@ -98,21 +98,21 @@ class ShakeService(object):
         json_data = requests.post(url, data=data).json()
         return json_data
 
-    def upload_picture(self, image_name): 
+    def upload_picture(self, image):
         """Uploads the picutre for the icon of page.
 
         (Link:
         https://mp.weixin.qq.com/wiki/5/e997428269ff189d8f9a4b9e177be2d9.html)
 
         Args:
-            image_name: the name of image.
+            image_name: the name of image. open(image_name, 'rb')
 
         Returns:
             json_data: the json data of the returns.
         """
         url = 'https://api.weixin.qq.com/shakearound/material/add?'
         url += 'access_token={0}'.format(self.__access_token)
-        files = {'media': open(image_name, 'rb')}
+        files = {'media': image}
         json_data = requests.post(url, files=files).json()
         return json_data
 
