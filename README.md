@@ -22,4 +22,13 @@ Tested interfaces:
 + edit_page
 + delete\_pages\_by_ids
 + apply_devices
-+ edit\_device\_info
++ edit\_device_info
++ bind\_the_page
++ find\_pages\_by_counts
++ find_devices
+
+Todo:
+
++ Impove codes
++ Add the service of card
++ Test interfaces
