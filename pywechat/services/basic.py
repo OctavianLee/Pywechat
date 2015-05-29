@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+import requests
 from helpers import mc
 
 
 class Basic(object):
     """The basic class of all services.
     """
-    def __init__(self, app_id, app_secret):
+    def __init__(self, app_id, app_secret, flag=None):
         """Initializes the service.
 
         Args:
@@ -15,6 +16,7 @@ class Basic(object):
         """
         self.__app_id = app_id
         self.__app_secret = app_secret
+        self.__flag = flag
         self.__access_token = self._get_access_token()
     
     def _get_access_token(self):
@@ -28,7 +30,12 @@ class Basic(object):
         """
 
         #Checks whether the access token is in memcache,
-        access_token = mc.get("access_token")
+        key = None
+        if self.__flag:
+            key = self.__flag
+        else:
+            key = self.__app_id
+        access_token = mc.get(key)
         if not access_token:
             url = 'https://api.weixin.qq.com/cgi-bin/token?'
             url += 'grant_type=client_credential&'
@@ -38,5 +45,5 @@ class Basic(object):
             token_json = requests.get(url, verify=True).json()
             access_token = token_json.get('access_token')
             expires_in = token_json.get('expires_in')
-            mc.set("access_token", access_token, expires_in)
+            mc.set(key, access_token, expires_in)
         return access_token

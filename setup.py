@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
-url="https://github.com/OctavianLee/pywechat"
+url="https://github.com/OctavianLee/Pywechat"
 VERSION = "0.0.1"
 
 setup(

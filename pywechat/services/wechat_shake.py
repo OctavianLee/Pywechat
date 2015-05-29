@@ -57,7 +57,7 @@ class ShakeService(Basic):
         data = json.dumps(data)
 
         url = 'https://api.weixin.qq.com/shakearound/device/bindpage?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -74,7 +74,7 @@ class ShakeService(Basic):
             json_data: the json data of the returns.
         """
         url = 'https://api.weixin.qq.com/shakearound/material/add?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         files = {'media': image}
         json_data = requests.post(url, files=files).json()
         return json_data
@@ -97,7 +97,7 @@ class ShakeService(Basic):
             json_data: the json data of the returns.
         """
         url = 'https://api.weixin.qq.com/shakearound/device/applyid?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         data = {
             "quantity": quantity,
             "apply_reason": apply_reason,
@@ -146,7 +146,7 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/update?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -187,7 +187,7 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/bindlocation?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -225,7 +225,7 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/search?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -253,7 +253,7 @@ class ShakeService(Basic):
             data.update({"apply_id": apply_id})
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/search?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -285,7 +285,7 @@ class ShakeService(Basic):
             data.update({"comment": comment})
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/add?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -319,7 +319,7 @@ class ShakeService(Basic):
             data.update({"comment": comment})
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/update?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -340,7 +340,7 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/search?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -363,7 +363,7 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/search?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -384,7 +384,7 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/delete?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -411,7 +411,7 @@ class ShakeService(Basic):
             data.update({"need_poi": need_poi})
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/user/getshakeinfo?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -454,7 +454,7 @@ class ShakeService(Basic):
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/'
         url += 'statistics/device?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
@@ -480,7 +480,7 @@ class ShakeService(Basic):
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/'
         url += 'statistics/page?'
-        url += 'access_token={0}'.format(self.__access_token)
+        url += 'access_token={0}'.format(self._get_access_token())
         json_data = requests.post(url, data=data).json()
         return json_data
 
