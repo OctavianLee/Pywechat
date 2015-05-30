@@ -20,7 +20,8 @@ class WechatService(object):
             the service of wechat
         """
         services = {
-            'Shake': ShakeService
+            'Shake': ShakeService,
+            'Card': CardService
         }
         if not services.has_key(service_name):
             raise NameError
