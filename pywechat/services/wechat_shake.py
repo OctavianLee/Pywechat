@@ -68,7 +68,7 @@ class ShakeService(Basic):
         https://mp.weixin.qq.com/wiki/5/e997428269ff189d8f9a4b9e177be2d9.html)
 
         Args:
-            image_name: the name of image. open(image_name, 'rb')
+            image: the file of image. open(image_name, 'rb')
 
         Returns:
             json_data: the json data of the returns.

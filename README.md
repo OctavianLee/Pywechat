@@ -1,5 +1,10 @@
 # Pywechat
 Encapsulates wechat's APIs with Python.
+微信公众平台api
+
+If you wants to fix the code or help me complete the whole project, just send me
+the pull request!
+
 
 Libs:
 
@@ -40,6 +45,3 @@ Todo:
 + Impove codes
 + Add the service of card
 + Test interfaces
-
-
-
