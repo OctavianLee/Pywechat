@@ -44,3 +44,60 @@ class CardService(Basic):
         json_data = requests.post(url).json()
         return json_data
 
+    def create_card(
+        self, card_dict,
+        logo_url, code_type, brand_name, title,
+        color, notice, description, quantity, type,
+        **infos)
+        """Creates a card.
+
+        (Link:
+        https://mp.weixin.qq.com/wiki/8/b7e310e7943f7763450eced91fa793b0.html)
+
+        Returns:
+            json_data: the json data of the returns."""
+        info_dict = {name: value for name, value in infos}
+        date_info = None
+        if (info_dict.has_key('begin_timestamp') and 
+            info_dict.has_key('end_timestamp')):
+            date_info = {
+              "type": type,
+              "begin_timestamp": info_dict['begin_timestamp'],
+              "end_timestamp": info_dict['end_timestamp']
+            }
+            del info_dict['begin_timestamp']
+            del info_dict['end_timestamp']
+        base_info = {
+            "logo_url": logo_url,
+            "brand_name": brand_name,
+            "title": title,
+            "code_type": code_type,
+            "color": color,
+            "notice": notice,
+            "description": description,
+            "sku": {
+                "quantity" : quantity
+            },
+            date_info
+        }
+        base_info.update(info_dict)
+        data = {
+          card_dict,
+          "groupon": {
+              base_info
+          }
+        }
+        data = json.dumps(data)
+
+        url = 'https://api.weixin.qq.com/card/create?'
+        url += 'access_token={0}'.format(self._get_access_token())
+        json_data = requests.post(url, data=data).json()
+        return json_data
+
+
+
+        
+
+
+
+
