@@ -7,7 +7,7 @@ VERSION = "0.0.1"
 setup(
     name="pywechat",
     version=VERSION,
-    licens='MIT',
+    license='MIT',
     description="Encapsulates wechat's APIs with Python",
     author="Octavian Lee",
     author_email="octavianlee1@gmail.com",

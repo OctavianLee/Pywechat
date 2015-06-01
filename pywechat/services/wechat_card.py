@@ -12,7 +12,7 @@ class CardService(Basic):
     (Link: https://mp.weixin.qq.com/wiki/home/index.html)
     """
 
-    def upload_image(self, image):
+    def upload_image(self, image, access_token=None):
         """Uploads the image for the logo of card.
 
         (Link:
@@ -24,13 +24,15 @@ class CardService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         url = 'https://api.weixin.qq.com/cgi-bin/media/uploadimg?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         files = {'buffer': image}
         json_data = requests.post(url, files=files).json()
         return json_data
         
-    def get_colors(self):
+    def get_colors(self, access_token=None):
         """Gets the available colors of cards.
 
         (Link:
@@ -39,8 +41,10 @@ class CardService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         url = 'https://api.weixin.qq.com/card/getcolors?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url).json()
         return json_data
 
@@ -48,6 +52,7 @@ class CardService(Basic):
         self, card_dict,
         logo_url, code_type, brand_name, title,
         color, notice, description, quantity, type,
+        access_token=None,
         **infos):
         """Creates a card.
 
@@ -56,6 +61,8 @@ class CardService(Basic):
 
         Returns:
             json_data: the json data of the returns."""
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         info_dict = {name: value for name, value in infos}
         date_info = None
         if (info_dict.has_key('begin_timestamp') and 
@@ -95,14 +102,6 @@ class CardService(Basic):
         data = json.dumps(data)
 
         url = 'https://api.weixin.qq.com/card/create?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
-
-
-
-        
-
-
-
-

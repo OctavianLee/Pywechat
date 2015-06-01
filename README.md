@@ -5,11 +5,19 @@ Encapsulates wechat's APIs with Python.
 If you wants to fix the code or help me complete the whole project, just send me
 the pull request!
 
+## Todo
+
++ Impove codes
++ Add the service of card
++ Add some exceptions
++ Test interfaces
+
+
+## How to use
 
 Libs:
 
 + requests
-+ pylibmc
 
 ``` shell
 pip install -r requirements.txt
@@ -22,11 +30,31 @@ from pywechat import WechatService
 
 app_id = 'XXX'
 app_secret = 'XXX'
-wx = WechatService.init_service(app_id, app_secret, 'Shake')
+service = WechatService(app_id, app_secret)
+shake_service = service.init_service('Shake')
 ```
 
 Temporarily, I just finished the part of shaking without full tests.
 
+
+##Log
+
+2015-06-01
+
+I removed the pylibmc because i want to let users choose what they want to cache
+the access token, but by default, it always query from the api.
+However, is there a better practise?
+
+2015-05-29
+
+The project can be used.
+
+2015-05-27
+
+I created the project.
+
+
+## Finished tests
 Tested interfaces:
 
 + \_get\_access_token
@@ -40,9 +68,4 @@ Tested interfaces:
 + find\_pages\_by_counts
 + find_devices
 
-Todo:
 
-+ Impove codes
-+ Add the service of card
-+ Add some exceptions
-+ Test interfaces

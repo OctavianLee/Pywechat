@@ -14,6 +14,7 @@ class ShakeService(Basic):
 
     def bind_the_page(
         self, page_ids, bind, append,
+        access_token=None,
         device_id=None, uuid=None, major=None, minor=None):
         """Binds the relations ship between the device and pages.
 
@@ -28,6 +29,7 @@ class ShakeService(Basic):
             append: the mark of appending operation.
                 0 is to bestrow the page.
                 1 is to append the page.
+            access_token: the access token.
             device_id: the device id, 
                 it can be None when UUID, major and minor are seted.
             uuid: the uuid of device.
@@ -56,12 +58,15 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
 
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
+
         url = 'https://api.weixin.qq.com/shakearound/device/bindpage?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
-    def upload_picture(self, image):
+    def upload_picture(self, image, access_token=None):
         """Uploads the picutre for the icon of page.
 
         (Link:
@@ -73,14 +78,18 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
+        print access_token
         url = 'https://api.weixin.qq.com/shakearound/material/add?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         files = {'media': image}
         json_data = requests.post(url, files=files).json()
         return json_data
 
     def apply_devices(
         self, quantity, apply_reason, comment, 
+        access_token=None,
         poi_id=None): 
         """Applys devices from the wechat.
 
@@ -96,8 +105,10 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         url = 'https://api.weixin.qq.com/shakearound/device/applyid?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         data = {
             "quantity": quantity,
             "apply_reason": apply_reason,
@@ -111,6 +122,7 @@ class ShakeService(Basic):
 
     def edit_device_info(
         self, comment,
+        access_token=None,
         device_id=None, uuid=None, major=None, minor=None):
         """Edit the comment of a device.
 
@@ -128,6 +140,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
 
         device_identifier = None
         if device_id:
@@ -146,12 +160,13 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/update?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
     def bind_location(
         self, poi_id,
+        access_token=None,
         device_id=None, uuid=None, major=None, minor=None):
         """Bind the device with a location.
 
@@ -169,6 +184,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
 
         device_identifier = None
         if device_id:
@@ -187,12 +204,13 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/bindlocation?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
     def find_a_device(
         self,
+        access_token=None,
         device_id=None, uuid=None, major=None, minor=None):
         """Finds the information of a device.
 
@@ -209,6 +227,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         device_identifier = None
         if device_id:
             device_identifier = {
@@ -225,12 +245,13 @@ class ShakeService(Basic):
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/search?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
     def find_devices(
         self, begin, count,
+        access_token=None,
         apply_id=None):
         """Finds the information of a device.
 
@@ -245,6 +266,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         data = {
             "begin": begin,
             "count": count
@@ -253,12 +276,13 @@ class ShakeService(Basic):
             data.update({"apply_id": apply_id})
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/search?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
     def add_new_page(
         self, title, description, page_url, icon_url,
+        access_token=None,
         comment=None):
         """Adds the new page.
 
@@ -275,6 +299,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         data = {
             "title": title,
             "description": description,
@@ -285,12 +311,13 @@ class ShakeService(Basic):
             data.update({"comment": comment})
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/add?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
     def edit_page(
         self, page_id, title, description, page_url, icon_url,
+        access_token=None,
         comment=None):
         """Edits a page.
 
@@ -308,6 +335,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         data = {
             "page_id": page_id,
             "title": title,
@@ -319,11 +348,11 @@ class ShakeService(Basic):
             data.update({"comment": comment})
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/update?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
-    def find_pages_by_ids(self, page_ids):
+    def find_pages_by_ids(self, page_ids, access_token=None):
         """Finds pages by ids.
 
         (Link:
@@ -335,16 +364,18 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         data = {
             "page_ids": page_ids,
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/search?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
-    def find_pages_by_counts(self, begin, count):
+    def find_pages_by_counts(self, begin, count, access_token=None):
         """Finds pages by counts.
 
         (Link:
@@ -357,17 +388,19 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         data = {
             "begin": begin,
             "count": count
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/search?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
-    def delete_pages_by_ids(self, page_ids):
+    def delete_pages_by_ids(self, page_ids, access_token=None):
         """Deletes pages by ids.
 
         (Link:
@@ -379,16 +412,18 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         data = {
             "page_ids": page_ids,
         }
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/delete?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
-    def get_shake_info(self, ticket, need_poi=None):
+    def get_shake_info(self, ticket, need_poi=None, access_token=None):
         """Gets the informaiton of shaking.
 
         Gets the information of devices including UUID, major, minor etc.
@@ -404,6 +439,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         data = {
             "ticket": ticket
         }
@@ -411,12 +448,13 @@ class ShakeService(Basic):
             data.update({"need_poi": need_poi})
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/user/getshakeinfo?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
     def get_statistics_for_device(
         self, begin_date, end_date,
+        access_token=None,
         device_id=None, uuid=None, major=None, minor=None):
         """Finds the information of a device.
 
@@ -435,6 +473,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         device_identifier = None
         if device_id:
             device_identifier = {
@@ -454,11 +494,13 @@ class ShakeService(Basic):
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/'
         url += 'statistics/device?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
-    def get_statistics_for_page(self, page_id, begin_date, end_date):
+    def get_statistics_for_page(
+        self, page_id, begin_date, end_date,
+        access_token=None):
         """Finds the information of a page.
 
         (Link:
@@ -472,6 +514,8 @@ class ShakeService(Basic):
         Returns:
             json_data: the json data of the returns.
         """
+        if not access_token:
+            access_token, expire_in = self._get_access_token()
         data = {
             "page_id": page_id,
             "begin_date": begin_date,
@@ -480,7 +524,7 @@ class ShakeService(Basic):
         data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/'
         url += 'statistics/page?'
-        url += 'access_token={0}'.format(self._get_access_token())
+        url += 'access_token={0}'.format(access_token)
         json_data = requests.post(url, data=data).json()
         return json_data
 
