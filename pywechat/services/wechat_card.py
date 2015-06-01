@@ -48,7 +48,7 @@ class CardService(Basic):
         self, card_dict,
         logo_url, code_type, brand_name, title,
         color, notice, description, quantity, type,
-        **infos)
+        **infos):
         """Creates a card.
 
         (Link:
@@ -67,6 +67,11 @@ class CardService(Basic):
             }
             del info_dict['begin_timestamp']
             del info_dict['end_timestamp']
+        else:
+            date_info = {
+              "type": type,
+            }
+
         base_info = {
             "logo_url": logo_url,
             "brand_name": brand_name,
@@ -78,15 +83,15 @@ class CardService(Basic):
             "sku": {
                 "quantity" : quantity
             },
-            date_info
         }
+        base_info.update(date_info)
         base_info.update(info_dict)
         data = {
-          card_dict,
           "groupon": {
               base_info
           }
         }
+        data.update(card_dict)
         data = json.dumps(data)
 
         url = 'https://api.weixin.qq.com/card/create?'

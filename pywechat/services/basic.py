@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import requests
-from helpers import mc
+from pywechat.helpers import mc
 
 
 class Basic(object):

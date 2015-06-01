@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from services.wechat_shake import ShakeService
+from services.wechat_card import CardService
 
 
 class WechatService(object):
