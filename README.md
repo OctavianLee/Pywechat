@@ -2,15 +2,18 @@
 Encapsulates wechat's APIs with Python.
 微信公众平台api
 
+
+If you have any advices, just open an issue or email me!
 If you wants to fix the code or help me complete the whole project, just send me
 the pull request!
 
-## Todo
+
+## Todo List
 
 + Impove codes
-+ Add the service of card
 + Add some exceptions
 + Test interfaces
++ Add a new service(Later...)
 
 
 ## How to use
@@ -34,10 +37,31 @@ service = WechatService(app_id, app_secret)
 shake_service = service.init_service('Shake')
 ```
 
-Temporarily, I just finished the part of shaking without full tests.
+Without Tests Now, it might have some bugs in the code.
 
 
-##Log
+## Methods I have used 
+
+Method in Shaking:
+
++ \_get\_access_token
++ upload_picture
++ add\_new_page
++ edit_page
++ delete\_pages\_by_ids
++ apply_devices
++ edit\_device_info
++ bind\_the_page
++ find\_pages\_by_counts
++ find_devices
+
+
+##Update Logs
+
+2015-06-02
+I have finished the part of card management without test.Now I will focus on
+improving codes and adding the tests.That will be a great job!
+
 
 2015-06-01
 
@@ -52,20 +76,4 @@ The project can be used.
 2015-05-27
 
 I created the project.
-
-
-## Finished tests
-Tested interfaces:
-
-+ \_get\_access_token
-+ upload_picture
-+ add\_new_page
-+ edit_page
-+ delete\_pages\_by_ids
-+ apply_devices
-+ edit\_device_info
-+ bind\_the_page
-+ find\_pages\_by_counts
-+ find_devices
-
 
