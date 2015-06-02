@@ -1,7 +1,8 @@
 # Pywechat
-Encapsulates wechat's APIs with Python.
-微信公众平台api
+A python SDK for the wechat public platform.
+微信公众平台api sdk
 
+ALL APIs are from https://mp.weixin.qq.com/wiki/home/index.html
 
 If you have any advices, just open an issue or email me!
 If you wants to fix the code or help me complete the whole project, just send me
@@ -10,9 +11,9 @@ the pull request!
 
 ## Todo List
 
-+ Impove codes
-+ Add some exceptions
-+ Test interfaces
++ Impove the code
++ Test the code
++ Fix bugs
 + Add a new service(Later...)
 
 
@@ -39,26 +40,15 @@ shake_service = service.init_service('Shake')
 
 Without Tests Now, it might have some bugs in the code.
 
-
-## Methods I have used 
-
-Method in Shaking:
-
-+ \_get\_access_token
-+ upload_picture
-+ add\_new_page
-+ edit_page
-+ delete\_pages\_by_ids
-+ apply_devices
-+ edit\_device_info
-+ bind\_the_page
-+ find\_pages\_by_counts
-+ find_devices
-
-
 ##Update Logs
 
+2015-06-03
+
+I refactored the project and added the exceptions in the code. It is a big change.
+
+
 2015-06-02
+
 I have finished the part of card management without test.Now I will focus on
 improving codes and adding the tests.That will be a great job!
 
