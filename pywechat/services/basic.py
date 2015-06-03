@@ -20,7 +20,7 @@ class Basic(object):
         """Initializes the service."""
         self.__app_id = app_id
         self.__app_secret = app_secret
-        self.__access_token = self.access_token
+        self.__access_token = self._grant_access_token()
         self.__token_expires_time = None
     
     @property
