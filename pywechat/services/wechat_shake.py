@@ -63,7 +63,6 @@ class ShakeService(Basic):
                 "major": major,
                 "minor": minor
             }
-        data = json.dumps(data)
 
         url = 'https://api.weixin.qq.com/shakearound/device/bindpage'
         json_data = self._send_request('post', url, data=data)
@@ -145,7 +144,6 @@ class ShakeService(Basic):
         }
         if poi_id:
             data["poi_id"] = poi_id
-        data = json.dumps(data)
         json_data = self._send_request('post', url, data=data)
         return json_data
 
@@ -192,7 +190,6 @@ class ShakeService(Basic):
                 "major": major,
                 "minor": minor
             }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/update'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -241,7 +238,6 @@ class ShakeService(Basic):
                 "major": major,
                 "minor": minor
             }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/bindlocation'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -301,7 +297,6 @@ class ShakeService(Basic):
         data = {
             "device_identifier": [device_identifier]
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/search'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -352,7 +347,6 @@ class ShakeService(Basic):
         }
         if apply_id:
             data["apply_id"] =  apply_id
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/device/search'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -395,7 +389,6 @@ class ShakeService(Basic):
         }
         if comment:
             data["comment"] = comment
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/add'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -440,7 +433,6 @@ class ShakeService(Basic):
         }
         if comment:
             data["comment"] = comment
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/update'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -481,7 +473,6 @@ class ShakeService(Basic):
         data = {
             "page_ids": page_ids,
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/search'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -524,7 +515,6 @@ class ShakeService(Basic):
             "begin": begin,
             "count": count
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/search'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -554,9 +544,7 @@ class ShakeService(Basic):
         data = {
             "page_ids": page_ids,
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/page/delete'
-        url += 'access_token={0}'.format(access_token)
         json_data = self._send_request('post', url, data=data)
         return json_data
 
@@ -591,7 +579,6 @@ class ShakeService(Basic):
         }
         if need_poi:
             data["need_poi"] = need_poi
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/user/getshakeinfo'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -649,7 +636,6 @@ class ShakeService(Basic):
                 "major": major,
                 "minor": minor
             }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/statistics/device'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -691,7 +677,6 @@ class ShakeService(Basic):
             "begin_date": begin_date,
             "end_date": end_date
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/shakearound/statistics/page'
         json_data = self._send_request('post', url, data=data)
         return json_data

@@ -66,7 +66,6 @@ class CardService(Basic):
         """
 
         url = 'https://api.weixin.qq.com/card/getcolors'
-        url += 'access_token={0}'.format(access_token)
         json_data = self._send_request('get', url)
         return json_data
 
@@ -157,7 +156,6 @@ class CardService(Basic):
           }
         }
         data.update(card_dict)
-        data = json.dumps(data)
 
         url = 'https://api.weixin.qq.com/card/create'
         json_data = self._send_request('post', url, data=data)
@@ -192,7 +190,6 @@ class CardService(Basic):
                 }
             }
         }
-        data = json.dumps(data)
 
         url = 'https://api.weixin.qq.com/card/qrcode/create'
         json_data = self._send_request('post', url, data=data)
@@ -222,7 +219,6 @@ class CardService(Basic):
         }
         if card_id:
             data["card_id"] = card_id
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/card/code/unavailable'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -249,7 +245,6 @@ class CardService(Basic):
         data = {
             "encrypt_code": encrypt_code
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/card/code/decrtpt'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -282,7 +277,6 @@ class CardService(Basic):
         }
         if card_id:
             data["card_id"] = card_id
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/card/code/get'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -342,7 +336,6 @@ class CardService(Basic):
         data = {
             "card_id": card_id
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/card/get'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -371,7 +364,6 @@ class CardService(Basic):
             "offset": offset,
             "count": count
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/card/batchget'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -416,7 +408,6 @@ class CardService(Basic):
                 "prerogative": prerogative
             }
         }
-        data = json.dumps(data)
 
         url = 'https://api.weixin.qq.com/card/update'
         json_data = self._send_request('post', url, data=data)
@@ -449,10 +440,8 @@ class CardService(Basic):
             data["increase_stock_value"] = increase_stock_value
         if reduce_stock_value:
             data["reduce_stock_value"] = reduce_stock_value
-        data = json.dumps(data)
 
         url = 'https://api.weixin.qq.com/card/modifystock'
-        url += 'access_token={0}'.format(access_token)
         json_data = self._send_request('post', url, data=data)
         return json_data
 
@@ -479,7 +468,6 @@ class CardService(Basic):
         }
         if card_id:
             data["card_id"] = card_id
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/card/code/update'
         json_data = self._send_request('post', url, data=data)
         return json_data
@@ -504,7 +492,6 @@ class CardService(Basic):
         data = {
             "card_id": card_id
         }
-        data = json.dumps(data)
         url = 'https://api.weixin.qq.com/card/delete'
         json_data = self._send_request('post', url, data=data)
         return json_data

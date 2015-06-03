@@ -27,7 +27,7 @@ class WechatService(object):
             the service of wechat
 
         Rasies:
-            NameError
+            SystemError
         """
         services = {
             'Shake': ShakeService,

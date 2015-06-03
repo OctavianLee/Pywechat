@@ -5,6 +5,7 @@ A python SDK for the wechat public platform.
 ALL APIs are from https://mp.weixin.qq.com/wiki/home/index.html
 
 If you have any advices, just open an issue or email me!
+
 If you wants to fix the code or help me complete the whole project, just send me
 the pull request!
 
@@ -14,6 +15,7 @@ the pull request!
 + Impove the code
 + Test the code
 + Fix bugs
++ Write comment for methods
 + Add a new service(Later...)
 
 
@@ -41,6 +43,9 @@ shake_service = service.init_service('Shake')
 Without Tests Now, it might have some bugs in the code.
 
 ##Update Logs
+
+2015-06-04
+BUG FIX
 
 2015-06-03
 

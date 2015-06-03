@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+import json
 import time
 import requests
 
-from excepts import WechatError
+from pywechat.excepts import WechatError
 
 
 class Basic(object):
@@ -19,7 +20,7 @@ class Basic(object):
         """Initializes the service."""
         self.__app_id = app_id
         self.__app_secret = app_secret
-        self.__access_token = self._get_access_token()
+        self.__access_token = self.access_token
         self.__token_expires_time = None
     
     @property
@@ -29,7 +30,7 @@ class Basic(object):
             return self.__access_token
 
         #if access token is invaild, grant it.
-        self.grant_access_token()
+        self._grant_access_token()
         return self.__access_token
 
     def _send_request(self, method, url, **kwargs):
@@ -46,12 +47,23 @@ class Basic(object):
         Raises:
             WechatError: to raise the exception if it contains the error.
         """
+        if not kwargs.get('params'):
+            kwargs['params'] = {
+                "access_token": self.access_token
+            }
+        if kwargs.get('data'):
+            data = json.dumps(kwargs['data']).encode('utf8')
+            kwargs["data"] = data
 
-        r = requests.request(
-            method=method,
-            url=url,
-            **kwargs
-        )
+        try:
+            r = requests.request(
+                method=method,
+                url=url,
+                **kwargs
+            )
+        except Exception as e:
+            print e
+
         r.raise_for_status()
         json_data = r.json()
         self._check_wechat_error(json_data)
@@ -70,7 +82,7 @@ class Basic(object):
         if errcode and errcode != 0:
             raise WechatError(errcode, json_data.get('errmsg'))
 
-    def _get_access_token(self):
+    def _grant_access_token(self):
         """Gets the access token from wechat.
 
         Public account can use this method with APPID and APPSecret to gain
