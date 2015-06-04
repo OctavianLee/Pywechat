@@ -135,6 +135,11 @@ class CardService(Basic):
             date_info["end_timestamp"] = info_dict['end_timestamp']
             del info_dict['begin_timestamp']
             del info_dict['end_timestamp']
+        else:
+            date_info["fixed_term"] = info_dict['fixed_term']
+            date_info["fixed_begin_term"] = info_dict['fixed_begin_term']
+            del info_dict['fixed_term']
+            del info_dict['fixed_begin_term']
 
         base_info = {
             "logo_url": logo_url,
@@ -151,7 +156,7 @@ class CardService(Basic):
         }
         base_info.update(info_dict)
         data = {
-          card_type: {
+          card_type.upper(): {
               "base_info": base_info
           }
         }

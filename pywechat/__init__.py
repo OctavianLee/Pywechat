@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from pywechat.service import WechatService
+from pywechat.main import WechatService
