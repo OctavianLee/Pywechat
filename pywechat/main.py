@@ -29,15 +29,11 @@ class WechatService(object):
         Rasies:
             SystemError
         """
-        print 'sss'
         services = {
             'Shake': ShakeService,
             'Card': CardService
         }
 
-        print 'here'
         if not services.has_key(service_name):
-            print 12333
             raise SystemError('Service name wrong')
-        print 'bye'
         return services[service_name](self.__app_id, self.__app_secret)
