@@ -225,8 +225,7 @@ class ShakeService(Basic):
         """
 
         data = {
-            "device_identifier": device_identifier,
-            "poi_id": poi_id,
+            "poi_id": poi_id
         }
         if device_id:
             data["device_identifier"] = {
@@ -295,7 +294,7 @@ class ShakeService(Basic):
                 "minor": minor
             }
         data = {
-            "device_identifier": [device_identifier]
+            "device_identifiers": [device_identifier]
         }
         url = 'https://api.weixin.qq.com/shakearound/device/search'
         json_data = self._send_request('post', url, data=data)

@@ -21,12 +21,12 @@ class Basic(object):
         self.__app_id = app_id
         self.__app_secret = app_secret
         self.__access_token = self._grant_access_token()
-        self.__token_expires_time = None
+        self.__token_expires_at = None
     
     @property
     def access_token(self):
         #check the access token
-        if self.__access_token and (self.__token_expires_time > time.time()):
+        if self.__access_token and (self.__token_expires_at-time.time() > 60):
             return self.__access_token
 
         #if access token is invaild, grant it.
@@ -55,14 +55,11 @@ class Basic(object):
             data = json.dumps(kwargs['data']).encode('utf8')
             kwargs["data"] = data
 
-        try:
-            r = requests.request(
-                method=method,
-                url=url,
-                **kwargs
-            )
-        except Exception as e:
-            print e
+        r = requests.request(
+            method=method,
+            url=url,
+            **kwargs
+        )
 
         r.raise_for_status()
         json_data = r.json()
@@ -108,7 +105,7 @@ class Basic(object):
         }
         json_data = self._send_request('get', url, params=params)
         self.__access_token = json_data.get('access_token')
-        self.__token_expires_time = time.time() + json_data.get('expires_in')
+        self.__token_expires_at = int(time.time()) + json_data.get('expires_in')
         return json_data
 
     def _get_wechat_server_ips(self):
