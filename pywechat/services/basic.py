@@ -26,8 +26,9 @@ class Basic(object):
     @property
     def access_token(self):
         #check the access token
-        if self.__access_token and (self.__token_expires_at-time.time() > 60):
-            return self.__access_token
+        if self.__access_token and self.__token_expires_at:
+            if self.__token_expires_at - time.time() > 60:
+                return self.__access_token
 
         #if access token is invaild, grant it.
         self._grant_access_token()
@@ -52,7 +53,7 @@ class Basic(object):
                 "access_token": self.access_token
             }
         if kwargs.get('data'):
-            data = json.dumps(kwargs['data']).encode('utf8')
+            data = json.dumps(kwargs['data']).encode('utf-8')
             kwargs["data"] = data
 
         r = requests.request(

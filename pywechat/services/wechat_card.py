@@ -70,9 +70,9 @@ class CardService(Basic):
         return json_data
 
     def create_card(
-        self, card_dict, card_type,
+        self, card_dict, card_type, date_info,
         logo_url, code_type, brand_name, title,
-        color, notice, description, quantity, type,
+        color, notice, description, quantity,
         **infos):
         """Creates a card.
 
@@ -125,22 +125,6 @@ class CardService(Basic):
             WechatError: to raise the exception if it contains the error.
         """
 
-        info_dict = {name: value for name, value in infos}
-        date_info = {
-            "type": type,
-        }
-        if (info_dict.get('begin_timestamp') and 
-            info_dict.get('end_timestamp')):
-            date_info["begin_timestamp"] = info_dict['begin_timestamp']
-            date_info["end_timestamp"] = info_dict['end_timestamp']
-            del info_dict['begin_timestamp']
-            del info_dict['end_timestamp']
-        else:
-            date_info["fixed_term"] = info_dict['fixed_term']
-            date_info["fixed_begin_term"] = info_dict['fixed_begin_term']
-            del info_dict['fixed_term']
-            del info_dict['fixed_begin_term']
-
         base_info = {
             "logo_url": logo_url,
             "brand_name": brand_name,
@@ -154,13 +138,16 @@ class CardService(Basic):
             },
             "date_info": date_info
         }
-        base_info.update(info_dict)
+        base_info.update(infos)
         data = {
-          card_type.upper(): {
-              "base_info": base_info
+          "card": {
+              "card_type": card_type.upper(),
+              card_type: {
+                  "base_info": base_info
+              }
           }
         }
-        data.update(card_dict)
+        data["card"][card_type].update(card_dict)
 
         url = 'https://api.weixin.qq.com/card/create'
         json_data = self._send_request('post', url, data=data)
