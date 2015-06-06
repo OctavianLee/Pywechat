@@ -362,8 +362,8 @@ class CardService(Basic):
 
     def update_card(
         self, card_id, card_type,
-        logo_url, notice, description, color, detail,
-        bonus_cleared, bonus_rules, balance_rules, prerogative,
+        logo_url, notice, description, color, detail=None,
+        bonus_cleared=None, bonus_rules=None, balance_rule=None, prerogative=None,
         **infos):
         """Updates a card.
 
