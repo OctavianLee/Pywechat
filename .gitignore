@@ -1,5 +1,6 @@
 .DS_Store
 venv/
+conf/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
