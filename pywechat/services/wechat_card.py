@@ -142,7 +142,7 @@ class CardService(Basic):
         data = {
           "card": {
               "card_type": card_type.upper(),
-              card_type: {
+              card_type.lower(): {
                   "base_info": base_info
               }
           }
@@ -393,7 +393,7 @@ class CardService(Basic):
         base_info.update(info_dict)
         data = {
             "card_id": card_id,
-            card_type: {
+            card_type.lower(): {
                 "base_info": base_info,
                 "bonus_cleared": bonus_cleared,
                 "bonus_rules": bonus_rules,
@@ -406,7 +406,7 @@ class CardService(Basic):
         return json_data
 
     def modify_stock(
-        self, 
+        self, card_id,
         increase_stock_value=None, 
         reduce_stock_value=None):
         """Modifies the stock of a card.
