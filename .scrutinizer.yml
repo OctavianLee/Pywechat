@@ -7,7 +7,3 @@ tools:
     pylint:
         python_version: 2
         config_file: '.pylintrc'
-
-    external_code_coverage:
-        timeout: 120
-        runs: 1
