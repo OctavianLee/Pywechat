@@ -9,5 +9,5 @@ tools:
         config_file: '.pylintrc'
 
     external_code_coverage:
-        timeout: 300
-        runs: 2
+        timeout: 120
+        runs: 1
