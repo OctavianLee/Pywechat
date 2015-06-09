@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from pywechat.services.basic import Basic
 
+
 class CardService(Basic):
+
     """This class is an implement of the Wechat service of card.
 
 
@@ -30,7 +32,7 @@ class CardService(Basic):
         files = {'buffer': image}
         json_data = self._send_request('post', url, files=files)
         return json_data
-        
+
     def get_colors(self):
         """Gets the available colors of cards.
 
@@ -67,10 +69,10 @@ class CardService(Basic):
         return json_data
 
     def create_card(
-        self, card_dict, card_type, date_info,
-        logo_url, code_type, brand_name, title,
-        color, notice, description, quantity,
-        **infos):
+            self, card_dict, card_type, date_info,
+            logo_url, code_type, brand_name, title,
+            color, notice, description, quantity,
+            **infos):
         """Creates a card.
 
         Link:
@@ -131,18 +133,18 @@ class CardService(Basic):
             "notice": notice,
             "description": description,
             "sku": {
-                "quantity" : quantity
+                "quantity": quantity
             },
             "date_info": date_info
         }
         base_info.update(infos)
         data = {
-          "card": {
-              "card_type": card_type.upper(),
-              card_type.lower(): {
-                  "base_info": base_info
-              }
-          }
+            "card": {
+                "card_type": card_type.upper(),
+                card_type.lower(): {
+                    "base_info": base_info
+                }
+            }
         }
         data["card"][card_type].update(card_dict)
 
@@ -360,10 +362,10 @@ class CardService(Basic):
         return json_data
 
     def update_card(
-        self, card_id, card_type,
-        logo_url, notice, description, color, detail=None,
-        bonus_cleared=None, bonus_rules=None, balance_rules=None, prerogative=None,
-        **infos):
+            self, card_id, card_type,
+            logo_url, notice, description, color, detail=None,
+            bonus_cleared=None, bonus_rules=None, balance_rules=None, prerogative=None,
+            **infos):
         """Updates a card.
 
         Link:
@@ -404,9 +406,9 @@ class CardService(Basic):
         return json_data
 
     def modify_stock(
-        self, card_id,
-        increase_stock_value=None, 
-        reduce_stock_value=None):
+            self, card_id,
+            increase_stock_value=None,
+            reduce_stock_value=None):
         """Modifies the stock of a card.
 
         Link:

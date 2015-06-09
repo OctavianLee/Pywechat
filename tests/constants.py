@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from utils import constant, get_random_str, get_random_int
 
+
 class _Constant(object):
 
     @constant

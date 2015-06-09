@@ -11,6 +11,7 @@ from pywechat.services.basic import Basic
 
 
 class TestCase(unittest.TestCase):
+
     '''Creates a TestCase template to help test.'''
 
     def setUp(self):
@@ -18,6 +19,7 @@ class TestCase(unittest.TestCase):
 
 
 class BasicTest(unittest.TestCase):
+
     '''Creates a TestCase for the class of Basic.'''
 
     def setUp(self):
@@ -50,8 +52,8 @@ class BasicTest(unittest.TestCase):
             access_token = CONST.STRING
             expires_in = CONST.NUMBER
             mock_method.return_value = {
-              "access_token": access_token,
-              "expires_in": expires_in
+                "access_token": access_token,
+                "expires_in": expires_in
             }
             data = self.basic._grant_access_token()
             eq_(data.get('access_token'), access_token)
@@ -64,7 +66,7 @@ class BasicTest(unittest.TestCase):
                 ips = [CONST.STRING] * CONST.NUMBER
                 method.return_value = CONST.STRING
                 mock_method.return_value = {
-                  "ips": ips
+                    "ips": ips
                 }
                 data = self.basic._get_wechat_server_ips()
                 eq_(data.get('ips'), ips)

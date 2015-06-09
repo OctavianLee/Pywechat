@@ -6,12 +6,14 @@ from pywechat.excepts import CodeBuildError
 
 
 class WechatService(object):
+
     """This class is a role of factory.
 
     Attributes:
         app_id: the app id of a wechat account.
         app_secret: the app secret of a wechat account.
     """
+
     def __init__(self, app_id, app_secret):
         """Initializes the class."""
         self.__app_id = app_id

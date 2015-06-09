@@ -7,6 +7,7 @@ from pywechat.excepts import WechatError
 
 
 class Basic(object):
+
     """The basic class of all services.
 
     Attributes:
@@ -15,23 +16,23 @@ class Basic(object):
         access_token: the access token requests from the wechat.
         token_expires_time: the time that the access token will expire.
     """
-    
+
     def __init__(self, app_id, app_secret):
         """Initializes the service."""
         self.__app_id = app_id
         self.__app_secret = app_secret
         self.__access_token = self.access_token
         self.__token_expires_at = None
-    
+
     @property
     def access_token(self):
         '''Gets the access token.'''
-        #check the access token
+        # check the access token
         if self.__access_token and self.__token_expires_at:
             if self.__token_expires_at - time.time() > 60:
                 return self.__access_token
 
-        #if access token is invaild, grant it.
+        # if access token is invaild, grant it.
         self._grant_access_token()
         return self.__access_token
 
@@ -69,7 +70,7 @@ class Basic(object):
         return json_data
 
     @classmethod
-    def _check_wechat_error(self, json_data):
+    def _check_wechat_error(cls, json_data):
         """Check whether the data from the plaform of wechat is an error.
 
         Args:
@@ -99,7 +100,7 @@ class Basic(object):
             WechatError: to raise the exception if it contains the error.
         """
 
-        #Checks whether the access token is in memcache,
+        # Checks whether the access token is in memcache,
         url = 'https://api.weixin.qq.com/cgi-bin/token'
         params = {
             "grant_type": "client_credential",
@@ -108,7 +109,8 @@ class Basic(object):
         }
         json_data = self._send_request('get', url, params=params)
         self.__access_token = json_data.get('access_token')
-        self.__token_expires_at = int(time.time()) + json_data.get('expires_in')
+        self.__token_expires_at = int(
+            time.time()) + json_data.get('expires_in')
         return json_data
 
     def _get_wechat_server_ips(self):

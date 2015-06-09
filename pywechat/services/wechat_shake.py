@@ -3,6 +3,7 @@ from pywechat.services.basic import Basic
 
 
 class ShakeService(Basic):
+
     """This class is an implement of the Wechat service of shaking.
 
     All request's urls come from the official documents.
@@ -11,9 +12,9 @@ class ShakeService(Basic):
     """
 
     def bind_page(
-        self, 
-        page_ids, bind, append,
-        device_id=None, uuid=None, major=None, minor=None):
+            self,
+            page_ids, bind, append,
+            device_id=None, uuid=None, major=None, minor=None):
         """Binds the relations ship between the device and pages.
 
         Link:
@@ -98,9 +99,9 @@ class ShakeService(Basic):
         return json_data
 
     def apply_devices(
-        self, 
-        quantity, apply_reason, comment, 
-        poi_id=None): 
+            self,
+            quantity, apply_reason, comment,
+            poi_id=None):
         """Applys devices from the wechat.
 
         Link:
@@ -146,9 +147,9 @@ class ShakeService(Basic):
         return json_data
 
     def update_device(
-        self, 
-        comment,
-        device_id=None, uuid=None, major=None, minor=None):
+            self,
+            comment,
+            device_id=None, uuid=None, major=None, minor=None):
         """Edit the comment of a device.
 
         Link:
@@ -193,9 +194,9 @@ class ShakeService(Basic):
         return json_data
 
     def bind_location(
-        self,
-        poi_id,
-        device_id=None, uuid=None, major=None, minor=None):
+            self,
+            poi_id,
+            device_id=None, uuid=None, major=None, minor=None):
         """Bind the device with a location.
 
         Link:
@@ -240,8 +241,8 @@ class ShakeService(Basic):
         return json_data
 
     def search_device(
-        self,
-        device_id=None, uuid=None, major=None, minor=None):
+            self,
+            device_id=None, uuid=None, major=None, minor=None):
         """Finds the information of a device.
 
         Link:
@@ -280,7 +281,7 @@ class ShakeService(Basic):
             WechatError: to raise the exception if it contains the error.
         """
 
-        device_identifier = {} 
+        device_identifier = {}
         if device_id:
             device_identifier = {
                 "device_id": device_id
@@ -299,9 +300,9 @@ class ShakeService(Basic):
         return json_data
 
     def search_devices(
-        self, 
-        begin, count,
-        apply_id=None):
+            self,
+            begin, count,
+            apply_id=None):
         """Finds the information of devices.
 
         Link:
@@ -343,15 +344,15 @@ class ShakeService(Basic):
             "count": count
         }
         if apply_id:
-            data["apply_id"] =  apply_id
+            data["apply_id"] = apply_id
         url = 'https://api.weixin.qq.com/shakearound/device/search'
         json_data = self._send_request('post', url, data=data)
         return json_data
 
     def add_page(
-        self,
-        title, description, page_url, icon_url,
-        comment=None):
+            self,
+            title, description, page_url, icon_url,
+            comment=None):
         """Adds the new page.
 
         Link:
@@ -391,9 +392,9 @@ class ShakeService(Basic):
         return json_data
 
     def update_page(
-        self, 
-        page_id, title, description, page_url, icon_url,
-        comment=None):
+            self,
+            page_id, title, description, page_url, icon_url,
+            comment=None):
         """Edits a page.
 
         Link:
@@ -581,9 +582,9 @@ class ShakeService(Basic):
         return json_data
 
     def device_statistics(
-        self, 
-        begin_date, end_date,
-        device_id=None, uuid=None, major=None, minor=None):
+            self,
+            begin_date, end_date,
+            device_id=None, uuid=None, major=None, minor=None):
         """Gets the statistics of a device.
 
         Link:
@@ -610,7 +611,7 @@ class ShakeService(Basic):
                         "shake_uv": 0
                     }
                 ],
-                
+
                 "errcode": 0,
                 "errmsg": "success."
             }
@@ -660,7 +661,7 @@ class ShakeService(Basic):
                         "shake_uv": 0
                     }
                 ],
-                
+
                 "errcode": 0,
                 "errmsg": "success."
             }
