@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from services.wechat_shake import ShakeService
-from services.wechat_card import CardService
+from pywechat.services.wechat_shake import ShakeService
+from pywechat.services.wechat_card import CardService
 
-from excepts import SystemError
+from pywechat.excepts import CodeBuildError
 
 
 class WechatService(object):
@@ -18,7 +18,7 @@ class WechatService(object):
         self.__app_secret = app_secret
 
     def init_service(self, service_name):
-        """Init the service of wechat by service_name 
+        """Init the service of wechat by service_name.
 
         Args:
             service_name: the name of wechat's service.
@@ -35,5 +35,5 @@ class WechatService(object):
         }
 
         if not services.has_key(service_name):
-            raise SystemError('Service name wrong')
+            raise CodeBuildError('Service name wrong')
         return services[service_name](self.__app_id, self.__app_secret)

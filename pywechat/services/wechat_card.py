@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-import json
-import requests
-
-from basic import Basic
+from pywechat.services.basic import Basic
 
 class CardService(Basic):
     """This class is an implement of the Wechat service of card.
@@ -23,7 +20,7 @@ class CardService(Basic):
 
         Returns:
             the json data.Example:
-            {"url":"http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFNjakmxibMLGWpXrEXB33367o7zHN0CwngnQY7zb7g/0"}
+            {"url":"http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkm/0"}
 
         Raises:
             WechatError: to raise the exception if it contains the error.
@@ -86,7 +83,7 @@ class CardService(Basic):
                     "card_type": "GROUPON",
                     "groupon": {
                         "base_info": {
-                            "logo_url":  "http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFNjakmxibMLGWpXrEXB33367o7zHN0CwngnQY7zb7g/0",
+                            "logo_url":  "http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRK/0",
                             "brand_name":"海底捞",
                             "code_type":"CODE_TYPE_TEXT",
                             "title": "132元双人火锅套餐",
@@ -164,21 +161,23 @@ class CardService(Basic):
             {
               "errcode":0,
               "errmsg":"ok",
-              "ticket":"gQG28DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL0FuWC1DNmZuVEhvMVp4NDNMRnNRAAIEesLvUQMECAcAAA=="
+              "ticket":"gQG28DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmN=="
             }
 
         Raises:
             WechatError: to raise the exception if it contains the error.
         """
 
-        if infos:
-            info_dict = {name: value for name, value in infos}
+        card_dict = {
+            "code": code
+        }
+        card_dict.update(infos)
 
         data = {
             "action_name": "QR_CARD",
             "action_info": {
                 "card": {
-                    info_dict
+                    card_dict
                 }
             }
         }
@@ -286,7 +285,7 @@ class CardService(Basic):
                     "card_type": "GROUPON",
                     "groupon": {
                         "base_info": {
-                            "logo_url":  "http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8xXhiaHqkKSVMMWeN3hLut7X7hicFNjakmxibMLGWpXrEXB33367o7zHN0CwngnQY7zb7g/0",
+                            "logo_url":  "http://mmbiz.qpic.cn/mmbiz/iaL1LJM1mF9aRKPZJkmG8x/0",
                             "brand_name":"海底捞",
                             "code_type":"CODE_TYPE_TEXT",
                             "title": "132元双人火锅套餐",
@@ -363,7 +362,7 @@ class CardService(Basic):
     def update_card(
         self, card_id, card_type,
         logo_url, notice, description, color, detail=None,
-        bonus_cleared=None, bonus_rules=None, balance_rule=None, prerogative=None,
+        bonus_cleared=None, bonus_rules=None, balance_rules=None, prerogative=None,
         **infos):
         """Updates a card.
 
@@ -381,8 +380,6 @@ class CardService(Basic):
             WechatError: to raise the exception if it contains the error.
         """
 
-        info_dict = {name: value for name, value in infos}
-
         base_info = {
             "logo_url": logo_url,
             "notice": notice,
@@ -390,13 +387,14 @@ class CardService(Basic):
             "color": color,
             "detail": detail
         }
-        base_info.update(info_dict)
+        base_info.update(infos)
         data = {
             "card_id": card_id,
             card_type.lower(): {
                 "base_info": base_info,
                 "bonus_cleared": bonus_cleared,
                 "bonus_rules": bonus_rules,
+                "balance_rules": balance_rules,
                 "prerogative": prerogative
             }
         }

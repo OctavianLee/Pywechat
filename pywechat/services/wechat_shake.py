@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-import json
-
-from basic import Basic
+from pywechat.services.basic import Basic
 
 
 class ShakeService(Basic):
@@ -84,7 +82,7 @@ class ShakeService(Basic):
             {
                 "data": {
                     "pic_url":
-                    "http://shp.qpic.cn/wechat_shakearound_pic/0/1428377032e9dd2797018cad79186e03e8c5aec8dc/120"
+                    "http://shp.qpic.cn/wechat_shakearound_pic/0/1428377032/120"
                 },
                 "errcode": 0,
                 "errmsg": "success."
@@ -547,7 +545,7 @@ class ShakeService(Basic):
         json_data = self._send_request('post', url, data=data)
         return json_data
 
-    def get_shake_info(self, ticket, need_poi=None, access_token=None):
+    def get_shake_info(self, ticket, need_poi=None):
         """Gets the informaiton of shaking.
 
         Gets the information of devices including UUID, major, minor etc.

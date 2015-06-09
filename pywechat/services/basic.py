@@ -25,6 +25,7 @@ class Basic(object):
     
     @property
     def access_token(self):
+        '''Gets the access token.'''
         #check the access token
         if self.__access_token and self.__token_expires_at:
             if self.__token_expires_at - time.time() > 60:
@@ -35,7 +36,7 @@ class Basic(object):
         return self.__access_token
 
     def _send_request(self, method, url, **kwargs):
-        """Send a request to the server.
+        """Sends a request to the server.
 
         Args:
             method: the method of request.('get', 'post', etc)
@@ -56,17 +57,18 @@ class Basic(object):
             data = json.dumps(kwargs['data']).encode('utf-8')
             kwargs["data"] = data
 
-        r = requests.request(
+        request = requests.request(
             method=method,
             url=url,
             **kwargs
         )
 
-        r.raise_for_status()
-        json_data = r.json()
+        request.raise_for_status()
+        json_data = request.json()
         self._check_wechat_error(json_data)
         return json_data
 
+    @classmethod
     def _check_wechat_error(self, json_data):
         """Check whether the data from the plaform of wechat is an error.
 
