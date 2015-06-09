@@ -1,0 +1,13 @@
+check:
+    python:
+        code_rating: true
+        duplicate_code: true
+
+tools:
+    pylint:
+        python_version: 2
+        config_file: '.pylintrc'
+
+    external_code_coverage:
+        timeout: 300
+        runs: 2
