@@ -1,6 +1,11 @@
 # Pywechat
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Octavianlee/Pywechat/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Octavianlee/Pywechat/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/OctavianLee/Pywechat/badges/build.png?b=master)](https://scrutinizer-ci.com/g/OctavianLee/Pywechat/build-status/master)
+
+
 A python SDK for the wechat public platform.
 微信公众平台api sdk
+
 
 ALL APIs are from https://mp.weixin.qq.com/wiki/home/index.html
 
