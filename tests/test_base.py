@@ -6,7 +6,7 @@ from nose.tools import eq_, ok_
 from .constants import CONST
 
 from pywechat import WechatService
-from pywechat.excepts import WechatError
+from pywechat.excepts import WechatError, CodeBuildError
 from pywechat.services.basic import Basic
 
 
@@ -16,6 +16,20 @@ class TestCase(unittest.TestCase):
 
     def setUp(self):
         self.service = WechatService(CONST.STRING, CONST.STRING)
+
+
+class WechatServiceTest(TestCase):
+
+    '''Creates a TestCase for the class of WechatService.'''
+
+    def test_init_service(self):
+        '''Tests the init service method.'''
+        service_name = CONST.STRING
+        with self.assertRaises(CodeBuildError) as e:
+            self.service.init_service(service_name)
+        with mock.patch.object(Basic, 'access_token', autospec=True):
+            self.service.init_service('Shake')
+            self.service.init_service('Card')
 
 
 class BasicTest(unittest.TestCase):
