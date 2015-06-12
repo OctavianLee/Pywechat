@@ -49,7 +49,8 @@ Without Tests Now, it might have some bugs in the code.
 
 ##Update Logs
 
-2015-06-04
+2015-06-04 --- Now
+
 BUG FIX
 
 2015-06-03
