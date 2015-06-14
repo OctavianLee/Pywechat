@@ -50,3 +50,111 @@ class ShakeServiceTest(TestCase):
             eq_(data["data"]["device_identifiers"][0]["uuid"], uuid)
             eq_(data["data"]["device_identifiers"][0]["major"], major)
             eq_(data["data"]["device_identifiers"][0]["minor"], minor)
+
+    def test_update_device(self):
+        comment = CONST.STRING
+        device_id = CONST.NUMBER
+        uuid = CONST.NUMBER
+        major = CONST.NUMBER
+        minor = CONST.NUMBER
+        with mock.patch.object(ShakeService, 'update_device') as mock_method:
+            mock_method.return_value = {
+                "data": {
+                },
+                "errcode": 0,
+                "errmsg": "success."
+            }
+            data = self.shakeservice.update_device(comment, device_id)
+            self.assertIsNotNone(data)
+            data = self.shakeservice.update_device(comment, uuid=uuid,
+                                                   major=major, minor=minor)
+            self.assertIsNotNone(data)
+
+    def test_bind_location(self):
+        poi_id = CONST.NUMBER
+        device_id = CONST.NUMBER
+        uuid = CONST.NUMBER
+        major = CONST.NUMBER
+        minor = CONST.NUMBER
+        with mock.patch.object(ShakeService, 'bind_location') as mock_method:
+            mock_method.return_value = {
+                "data": {
+                },
+                "errcode": 0,
+                "errmsg": "success."
+            }
+            data = self.shakeservice.bind_location(poi_id, device_id)
+            self.assertIsNotNone(data)
+            data = self.shakeservice.bind_location(poi_id, uuid=uuid,
+                                                   major=major, minor=minor)
+            self.assertIsNotNone(data)
+
+    def test_search_device(self):
+        device_id = CONST.NUMBER
+        uuid = CONST.NUMBER
+        major = CONST.NUMBER
+        minor = CONST.NUMBER
+        with mock.patch.object(ShakeService, 'search_device') as mock_method:
+            mock_method.return_value = {
+                "data": {
+                    "devices": [
+                        {
+                            "comment": "",
+                            "device_id": device_id,
+                            "major": major,
+                            "minor": minor,
+                            "page_ids": "15369",
+                            "status": 1,
+                            "poi_id": 0,
+                            "uuid": uuid
+                        }
+                    ],
+                    "total_count": 1
+                },
+                "errcode": 0,
+                "errmsg": "success."
+            }
+            data = self.shakeservice.search_device(device_id)
+            eq_(data["data"]["devices"][0]["device_id"], device_id)
+            eq_(data["data"]["devices"][0]["uuid"], uuid)
+            eq_(data["data"]["devices"][0]["major"], major)
+            eq_(data["data"]["devices"][0]["minor"], minor)
+            data = self.shakeservice.search_device(uuid=uuid,
+                                                   major=major, minor=minor)
+            eq_(data["data"]["devices"][0]["device_id"], device_id)
+            eq_(data["data"]["devices"][0]["uuid"], uuid)
+            eq_(data["data"]["devices"][0]["major"], major)
+            eq_(data["data"]["devices"][0]["minor"], minor)
+
+    def test_search_devices(self):
+        apply_id = CONST.NUMBER
+        device_id = CONST.NUMBER
+        uuid = CONST.NUMBER
+        major = CONST.NUMBER
+        minor = CONST.NUMBER
+        with mock.patch.object(ShakeService, 'search_devices') as mock_method:
+            mock_method.return_value = {
+                "data": {
+                    "devices": [
+                        {
+                            "comment": "",
+                            "device_id": device_id,
+                            "major": major,
+                            "minor": minor,
+                            "page_ids": "15369",
+                            "status": 1,
+                            "poi_id": 0,
+                            "uuid": uuid
+                        }
+                    ],
+                    "total_count": 1
+                },
+                "errcode": 0,
+                "errmsg": "success."
+            }
+            data = self.shakeservice.search_devices(0, 1, apply_id)
+            eq_(data["data"]["devices"][0]["device_id"], device_id)
+            eq_(data["data"]["devices"][0]["uuid"], uuid)
+            eq_(data["data"]["devices"][0]["major"], major)
+            eq_(data["data"]["devices"][0]["minor"], minor)
+            eq_(data["data"]["total_count"], 1)
