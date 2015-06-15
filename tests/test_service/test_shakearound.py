@@ -158,3 +158,17 @@ class ShakeServiceTest(TestCase):
             eq_(data["data"]["devices"][0]["major"], major)
             eq_(data["data"]["devices"][0]["minor"], minor)
             eq_(data["data"]["total_count"], 1)
+
+    def test_upload_material(self):
+        image = CONST.STRING
+        pic_url = CONST.STRING
+        with mock.patch.object(ShakeService, 'upload_material') as mock_method:
+            mock_method.return_value = {
+                "data": {
+                    "pic_url": pic_url
+                },
+                "errcode": 0,
+                "errmsg": "success."
+            }
+            data = self.shakeservice.upload_material(image)
+            eq_(data["data"]["pic_url"], pic_url)
