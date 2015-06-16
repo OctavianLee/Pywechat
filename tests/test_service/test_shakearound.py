@@ -172,3 +172,22 @@ class ShakeServiceTest(TestCase):
             }
             data = self.shakeservice.upload_material(image)
             eq_(data["data"]["pic_url"], pic_url)
+
+    def test_add_page(self):
+        title = CONST.STRING
+        description = CONST.STRING
+        page_url = CONST.STRING
+        icon_url = CONST.STRING
+        comment = CONST.STRING
+        page_id = CONST.NUMBER
+        with mock.patch.object(ShakeService, 'add_page') as mock_method:
+            mock_method.return_value = {
+                "data": {
+                    "page_id": page_id
+                },
+                "errcode": 0,
+                "errmsg": "success."
+            }
+            data = self.shakeservice.add_page(title, description, page_url,
+                                              icon_url, comment)
+            eq_(data["data"]["page_id"], page_id)
