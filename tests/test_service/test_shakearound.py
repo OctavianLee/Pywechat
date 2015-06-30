@@ -17,7 +17,7 @@ class ShakeServiceTest(TestCase):
     def setUp(self):
         TestCase.setUp(self)
         with mock.patch.object(Basic, 'access_token', autospec=True):
-            self.shakeservice = self.service.init_service('Shake')
+            self.shake_service = self.service.init_service('Shake')
 
     def test_apply_devices(self):
         with mock.patch.object(ShakeService, 'apply_devices') as mock_method:
@@ -43,8 +43,8 @@ class ShakeServiceTest(TestCase):
             }
             apply_reason = CONST.STRING
             comment = CONST.STRING
-            data = self.shakeservice.apply_devices(1,
-                                                   apply_reason, comment)
+            data = self.shake_service.apply_devices(1,
+                                                    apply_reason, comment)
             eq_(data["data"]["apply_id"], apply_id)
             eq_(data["data"]["device_identifiers"][0]["device_id"], device_id)
             eq_(data["data"]["device_identifiers"][0]["uuid"], uuid)
@@ -64,10 +64,10 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.update_device(comment, device_id)
+            data = self.shake_service.update_device(comment, device_id)
             self.assertIsNotNone(data)
-            data = self.shakeservice.update_device(comment, uuid=uuid,
-                                                   major=major, minor=minor)
+            data = self.shake_service.update_device(comment, uuid=uuid,
+                                                    major=major, minor=minor)
             self.assertIsNotNone(data)
 
     def test_bind_location(self):
@@ -83,10 +83,10 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.bind_location(poi_id, device_id)
+            data = self.shake_service.bind_location(poi_id, device_id)
             self.assertIsNotNone(data)
-            data = self.shakeservice.bind_location(poi_id, uuid=uuid,
-                                                   major=major, minor=minor)
+            data = self.shake_service.bind_location(poi_id, uuid=uuid,
+                                                    major=major, minor=minor)
             self.assertIsNotNone(data)
 
     def test_search_device(self):
@@ -114,13 +114,13 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.search_device(device_id)
+            data = self.shake_service.search_device(device_id)
             eq_(data["data"]["devices"][0]["device_id"], device_id)
             eq_(data["data"]["devices"][0]["uuid"], uuid)
             eq_(data["data"]["devices"][0]["major"], major)
             eq_(data["data"]["devices"][0]["minor"], minor)
-            data = self.shakeservice.search_device(uuid=uuid,
-                                                   major=major, minor=minor)
+            data = self.shake_service.search_device(uuid=uuid,
+                                                    major=major, minor=minor)
             eq_(data["data"]["devices"][0]["device_id"], device_id)
             eq_(data["data"]["devices"][0]["uuid"], uuid)
             eq_(data["data"]["devices"][0]["major"], major)
@@ -152,7 +152,7 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.search_devices(0, 1, apply_id)
+            data = self.shake_service.search_devices(0, 1, apply_id)
             eq_(data["data"]["devices"][0]["device_id"], device_id)
             eq_(data["data"]["devices"][0]["uuid"], uuid)
             eq_(data["data"]["devices"][0]["major"], major)
@@ -170,7 +170,7 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.upload_material(image)
+            data = self.shake_service.upload_material(image)
             eq_(data["data"]["pic_url"], pic_url)
 
     def test_add_page(self):
@@ -188,8 +188,8 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.add_page(title, description, page_url,
-                                              icon_url, comment)
+            data = self.shake_service.add_page(title, description, page_url,
+                                               icon_url, comment)
             eq_(data["data"]["page_id"], page_id)
 
     def test_update_page(self):
@@ -207,8 +207,8 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.update_page(page_id, title, description, page_url,
-                                                 icon_url, comment)
+            data = self.shake_service.update_page(page_id, title, description, page_url,
+                                                  icon_url, comment)
             eq_(data["data"]["page_id"], page_id)
 
     def test_search_page_by_ids(self):
@@ -237,7 +237,7 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.search_page_by_ids(page_ids)
+            data = self.shake_service.search_page_by_ids(page_ids)
             page_data = {
                 "comment": comment,
                 "description": description,
@@ -274,7 +274,7 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.search_page_by_counts(0, 1)
+            data = self.shake_service.search_page_by_counts(0, 1)
             page_data = {
                 "comment": comment,
                 "description": description,
@@ -296,7 +296,7 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.delete_page(page_ids)
+            data = self.shake_service.delete_page(page_ids)
             self.assertIsNotNone(data)
 
     def test_bind_page(self):
@@ -315,7 +315,7 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.bind_location(page_ids)
+            data = self.shake_service.bind_location(page_ids)
             self.assertIsNotNone(data)
 
     def test_get_shake_info(self):
@@ -328,7 +328,7 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.get_shake_info(ticket, need_poi)
+            data = self.shake_service.get_shake_info(ticket, need_poi)
             self.assertIsNotNone(data)
 
     def test_device_statistics(self):
@@ -353,8 +353,8 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.device_statistics(begin_date, end_date,
-                                                       device_id, uuid, major, minor)
+            data = self.shake_service.device_statistics(begin_date, end_date,
+                                                        device_id, uuid, major, minor)
             statistics = {
                 "click_pv": 0,
                 "click_uv": 0,
@@ -384,8 +384,8 @@ class ShakeServiceTest(TestCase):
                 "errcode": 0,
                 "errmsg": "success."
             }
-            data = self.shakeservice.page_statistics(page_id, begin_date,
-                                                     end_date)
+            data = self.shake_service.page_statistics(page_id, begin_date,
+                                                      end_date)
             statistics = {
                 "click_pv": 0,
                 "click_uv": 0,
